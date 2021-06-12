@@ -6,9 +6,16 @@ import java.io.IOException;
 
 public class Application {
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		String file = "movies.txt";
-		MovieService ms = new MovieService(file);
+		MovieService ms = null;
+		try {
+			ms = new MovieService(file);
+		}
+		catch (IOException ex) {
+			System.out.println("Błąd: nie można odczytać danych z pliku!");
+			return;
+		}
 
 		ms.findMovies("street", MovieService.TITLE, false);
 		ms.findMovies("Douglas", MovieService.ACTOR, true);
