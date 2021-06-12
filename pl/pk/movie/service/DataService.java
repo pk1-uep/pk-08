@@ -22,10 +22,14 @@ public class DataService {
 			}
 			
 			String[] parts = oneLine.split(";");
+			if (parts.length != 5) {
+				continue;
+			}
+
 			Movie movie = new Movie();
 			
 			// id
-			int id = doInt(parts[0]);
+			Integer id = doInt(parts[0]);
 			movie.setId(id);
 			
 			// title
@@ -33,7 +37,7 @@ public class DataService {
 			movie.setTitle(title);
 			
 			// year
-			int year = doInt(parts[2]);
+			Integer year = doInt(parts[2]);
 			movie.setYear(year);
 			
 			// director
@@ -51,7 +55,7 @@ public class DataService {
 			// add movie to data
 			data.add(movie);
 		}
-		
+
 		return data;
 	}
 
@@ -62,13 +66,7 @@ public class DataService {
 
 	private static Integer doInt(String text) {
 		text = text.trim();
-		Integer value = null;
-		try {
-			value = Integer.parseInt(text);
-		}
-		catch (Exception ex) {
-			System.out.println("Błąd: " + text + " nie jest liczbą całkowitą!");
-		}
+		Integer value = Integer.parseInt(text);
 		return value;
 	}
 
